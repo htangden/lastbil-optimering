@@ -1,0 +1,14 @@
+OPTIMALA VÄRDEN:
+LASTBILAR:Göteborg_Borås = 65.0
+LASTBILAR:Göteborg_Halmstad = 65.0
+LASTBILAR:Göteborg_Jönköping = 30.0
+LASTBILAR:Göteborg_Skövde = 40.0
+LASTBILAR:Helsingborg_Halmstad = 5.0
+LASTBILAR:Helsingborg_Kristianstad = 15.0
+LASTBILAR:Helsingborg_Malmö = 130.0
+LASTBILAR:Älmhult_Kalmar = 30.0
+LASTBILAR:Älmhult_Kristianstad = 35.0
+LASTBILAR:Älmhult_Väjxö = 35.0
+
+STRÄCKA KÖRD:
+37558.42

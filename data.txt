@@ -1,0 +1,14 @@
+FABRIKER
+Älmhult 56.59 14.16 100
+Göteborg 57.71 11.97 200
+Helsingborg 56.05 12.69 150
+
+GROSSISTER
+Halmstad 56.67 12.86 70
+Jönköping 57.78 14.16 30
+Malmö 55.61 13.00 130
+Kalmar 56.66 16.36 30
+Skövde 58.39 13.85 40
+Väjxö 56.58 14.81 35
+Borås 57.72 12.94 65
+Kristianstad 56.03 14.15 50
