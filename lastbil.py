@@ -6,6 +6,8 @@ import math
 import sys
 
 
+
+
 class Building:
 
     def __init__(self, pos : Tuple[float, float], name : str):
@@ -18,11 +20,6 @@ class Building:
     def __str__(self):
         return self.name
     
-    def dms_to_decimal(self, degrees, minutes, seconds, direction):
-        decimal = degrees + minutes / 60 + seconds / 3600
-        if direction in ['S', 'W']:
-            decimal *= -1
-        return decimal
 
 class Factory(Building):
     
@@ -36,14 +33,31 @@ class Supplier(Building):
         super().__init__(pos, name)
         self.needed = needed
 
+class Distributor(Building):
+
+    def __init__(self, pos : Tuple[float, float], name : str):
+        super().__init__(pos, name)
  
 
+def weighted_midpoint(suppliers : list[Supplier]) -> Tuple[float, float]:
+    coords = [supplier.pos for supplier in suppliers]
+    a = [supplier.needed for supplier in suppliers]
+
+    x_coords, y_coords = zip(*coords)
+
+    ak2 = sum([ak**2 for ak in a])
+    ak2_xk = sum([a[i]**2*x_coords[i] for i in range(len(a))])
+    ak2_yk = sum([a[i]**2*y_coords[i] for i in range(len(a))])
+
+    x = ak2_xk/ak2
+    y = ak2_yk/ak2
+    return (x, y)
 
 model = LpProblem("lastbilsproblem ", LpMinimize)
 
 
-
 path_to_data = sys.argv[1]
+
 
 factories, suppliers = [], []
 
@@ -62,7 +76,10 @@ with open(path_to_data) as file:
             (factories if section == "FABRIKER" else suppliers).append(
                 (Factory if section == "FABRIKER" else Supplier)((float(x), float(y)), name, int(capacity))
             )
-    
+
+
+suppliers.append(Supplier(weighted_midpoint(suppliers), "Mellanlager", 0))
+
 
 road_len = []
 num_trucks = []
@@ -74,7 +91,9 @@ for i, building in enumerate(factories + suppliers):
         num_trucks[i].append(LpVariable(f"LASTBILAR:{building}_{supplier}", 0, None, LpInteger))
         road_len[i].append(building.distanceTo(supplier))
 
-print(road_len)
+
+for row in road_len:
+    row[-1] /= 5
 
 model += lpSum(road_len[i][j] * num_trucks[i][j] for i in range(len(factories + suppliers)) for j in range(len(suppliers)))
 
@@ -98,3 +117,7 @@ with open("solution.txt", "w") as f:
         if (v.varValue != 0):
             f.write(f"{v.name} = {v.varValue}\n")
     f.write(f"\nSTRÄCKA KÖRD:\n{value(model.objective):.2f}")
+
+
+
+
