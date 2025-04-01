@@ -1,11 +1,11 @@
-\* lastbilsproblem_ *\
+\* lastbilsproblem_Kristianstad *\
 Minimize
 OBJ: 117.031467997 LASTBILAR:Borås_Halmstad
  + 72.9498920842 LASTBILAR:Borås_Jönköping
  + 238.062628612 LASTBILAR:Borås_Kalmar
  + 202.132093175 LASTBILAR:Borås_Kristianstad
  + 234.985314523 LASTBILAR:Borås_Malmö
- + 29.9940452598 LASTBILAR:Borås_Mellanlager
+ + 16.1738498042 LASTBILAR:Borås_Mellanlager
  + 91.9516130598 LASTBILAR:Borås_Skövde + 170.070640406 LASTBILAR:Borås_Väjxö
  + 57.8241232865 LASTBILAR:Göteborg_Borås
  + 127.705606929 LASTBILAR:Göteborg_Halmstad
@@ -13,7 +13,7 @@ OBJ: 117.031467997 LASTBILAR:Borås_Halmstad
  + 290.006626522 LASTBILAR:Göteborg_Kalmar
  + 229.481650759 LASTBILAR:Göteborg_Kristianstad
  + 242.21615088 LASTBILAR:Göteborg_Malmö
- + 33.2644113576 LASTBILAR:Göteborg_Mellanlager
+ + 17.9320630208 LASTBILAR:Göteborg_Mellanlager
  + 134.38145494 LASTBILAR:Göteborg_Skövde
  + 213.026678846 LASTBILAR:Göteborg_Väjxö
  + 117.031467997 LASTBILAR:Halmstad_Borås
@@ -21,7 +21,7 @@ OBJ: 117.031467997 LASTBILAR:Borås_Halmstad
  + 214.589770104 LASTBILAR:Halmstad_Kalmar
  + 106.953221929 LASTBILAR:Halmstad_Kristianstad
  + 118.34541695 LASTBILAR:Halmstad_Malmö
- + 7.82674715093 LASTBILAR:Halmstad_Mellanlager
+ + 5.22132791056 LASTBILAR:Halmstad_Mellanlager
  + 200.520260734 LASTBILAR:Halmstad_Skövde
  + 120.109853521 LASTBILAR:Halmstad_Väjxö
  + 186.590542614 LASTBILAR:Helsingborg_Borås
@@ -30,7 +30,7 @@ OBJ: 117.031467997 LASTBILAR:Borås_Halmstad
  + 236.793449858 LASTBILAR:Helsingborg_Kalmar
  + 91.0248842752 LASTBILAR:Helsingborg_Kristianstad
  + 52.7001283969 LASTBILAR:Helsingborg_Malmö
- + 9.94273119357 LASTBILAR:Helsingborg_Mellanlager
+ + 4.81593872778 LASTBILAR:Helsingborg_Mellanlager
  + 269.83903541 LASTBILAR:Helsingborg_Skövde
  + 143.848661612 LASTBILAR:Helsingborg_Väjxö
  + 72.9498920842 LASTBILAR:Jönköping_Borås
@@ -38,7 +38,7 @@ OBJ: 117.031467997 LASTBILAR:Borås_Halmstad
  + 182.251290843 LASTBILAR:Jönköping_Kalmar
  + 194.877692768 LASTBILAR:Jönköping_Kristianstad
  + 251.864235661 LASTBILAR:Jönköping_Malmö
- + 33.1296414064 LASTBILAR:Jönköping_Mellanlager
+ + 17.3818201741 LASTBILAR:Jönköping_Mellanlager
  + 70.3592908554 LASTBILAR:Jönköping_Skövde
  + 139.296008448 LASTBILAR:Jönköping_Väjxö
  + 238.062628612 LASTBILAR:Kalmar_Borås
@@ -46,7 +46,7 @@ OBJ: 117.031467997 LASTBILAR:Borås_Halmstad
  + 182.251290843 LASTBILAR:Kalmar_Jönköping
  + 153.600237954 LASTBILAR:Kalmar_Kristianstad
  + 239.359558591 LASTBILAR:Kalmar_Malmö
- + 39.0788543723 LASTBILAR:Kalmar_Mellanlager
+ + 19.0647959095 LASTBILAR:Kalmar_Mellanlager
  + 244.375679972 LASTBILAR:Kalmar_Skövde
  + 95.5688776167 LASTBILAR:Kalmar_Väjxö
  + 202.132093175 LASTBILAR:Kristianstad_Borås
@@ -54,37 +54,37 @@ OBJ: 117.031467997 LASTBILAR:Borås_Halmstad
  + 194.877692768 LASTBILAR:Kristianstad_Jönköping
  + 153.600237954 LASTBILAR:Kristianstad_Kalmar
  + 85.922226566 LASTBILAR:Kristianstad_Malmö
- + 13.9034741754 LASTBILAR:Kristianstad_Mellanlager
+ + 5.7654165158 LASTBILAR:Kristianstad_Mellanlager
  + 263.441799101 LASTBILAR:Kristianstad_Skövde
  + 73.6167797749 LASTBILAR:Kristianstad_Väjxö
  + 234.985314523 LASTBILAR:Malmö_Borås + 118.34541695 LASTBILAR:Malmö_Halmstad
  + 251.864235661 LASTBILAR:Malmö_Jönköping
  + 239.359558591 LASTBILAR:Malmö_Kalmar
  + 85.922226566 LASTBILAR:Malmö_Kristianstad
- + 17.4256551694 LASTBILAR:Malmö_Mellanlager
+ + 7.80465466332 LASTBILAR:Malmö_Mellanlager
  + 313.853462574 LASTBILAR:Malmö_Skövde + 156.052931731 LASTBILAR:Malmö_Väjxö
- + 149.970226299 LASTBILAR:Mellanlager_Borås
- + 39.1337357546 LASTBILAR:Mellanlager_Halmstad
- + 165.648207032 LASTBILAR:Mellanlager_Jönköping
- + 195.394271862 LASTBILAR:Mellanlager_Kalmar
- + 69.517370877 LASTBILAR:Mellanlager_Kristianstad
- + 87.1282758471 LASTBILAR:Mellanlager_Malmö
- + 226.725275888 LASTBILAR:Mellanlager_Skövde
- + 100.097769032 LASTBILAR:Mellanlager_Väjxö
+ + 161.738498042 LASTBILAR:Mellanlager_Borås
+ + 52.2132791056 LASTBILAR:Mellanlager_Halmstad
+ + 173.818201741 LASTBILAR:Mellanlager_Jönköping
+ + 190.647959095 LASTBILAR:Mellanlager_Kalmar
+ + 57.654165158 LASTBILAR:Mellanlager_Kristianstad
+ + 78.0465466332 LASTBILAR:Mellanlager_Malmö
+ + 236.497585238 LASTBILAR:Mellanlager_Skövde
+ + 96.38443913 LASTBILAR:Mellanlager_Väjxö
  + 91.9516130598 LASTBILAR:Skövde_Borås
  + 200.520260734 LASTBILAR:Skövde_Halmstad
  + 70.3592908554 LASTBILAR:Skövde_Jönköping
  + 244.375679972 LASTBILAR:Skövde_Kalmar
  + 263.441799101 LASTBILAR:Skövde_Kristianstad
  + 313.853462574 LASTBILAR:Skövde_Malmö
- + 45.3450551775 LASTBILAR:Skövde_Mellanlager
+ + 23.6497585238 LASTBILAR:Skövde_Mellanlager
  + 209.633942188 LASTBILAR:Skövde_Väjxö + 170.070640406 LASTBILAR:Väjxö_Borås
  + 120.109853521 LASTBILAR:Väjxö_Halmstad
  + 139.296008448 LASTBILAR:Väjxö_Jönköping
  + 95.5688776167 LASTBILAR:Väjxö_Kalmar
  + 73.6167797749 LASTBILAR:Väjxö_Kristianstad
  + 156.052931731 LASTBILAR:Väjxö_Malmö
- + 20.0195538065 LASTBILAR:Väjxö_Mellanlager
+ + 9.638443913 LASTBILAR:Väjxö_Mellanlager
  + 209.633942188 LASTBILAR:Väjxö_Skövde
  + 145.895327096 LASTBILAR:Älmhult_Borås
  + 80.2807489347 LASTBILAR:Älmhult_Halmstad
@@ -92,7 +92,7 @@ OBJ: 117.031467997 LASTBILAR:Borås_Halmstad
  + 135.259611524 LASTBILAR:Älmhult_Kalmar
  + 62.3576420501 LASTBILAR:Älmhult_Kristianstad
  + 130.830308184 LASTBILAR:Älmhult_Malmö
- + 12.4123623627 LASTBILAR:Älmhult_Mellanlager
+ + 6.08859690048 LASTBILAR:Älmhult_Mellanlager
  + 201.323079538 LASTBILAR:Älmhult_Skövde
  + 39.9559400049 LASTBILAR:Älmhult_Väjxö
 Subject To
