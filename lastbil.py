@@ -5,7 +5,7 @@ from typing import Tuple
 import math
 import sys
 
-
+TRAIN_TO_TRUCK = 5
 
 
 class Building:
@@ -39,9 +39,9 @@ class Distributor(Building):
         super().__init__(pos, name)
  
 
-def weighted_midpoint(suppliers : list[Supplier]) -> Tuple[float, float]:
-    coords = [supplier.pos for supplier in suppliers]
-    a = [supplier.needed for supplier in suppliers]
+def weighted_midpoint(suppliers : list[Supplier], factories : list[Factory]) -> Tuple[float, float]:
+    coords = [building.pos for building in suppliers + factories]
+    a = [supplier.needed for supplier in suppliers] + [factory.production_quantity/TRAIN_TO_TRUCK for factory in factories]
 
     x_coords, y_coords = zip(*coords)
 
@@ -78,7 +78,7 @@ with open(path_to_data) as file:
             )
 
 
-suppliers.append(Supplier(weighted_midpoint(suppliers), "Mellanlager", 0))
+suppliers.append(Supplier(weighted_midpoint(suppliers, factories), "Mellanlager", 0))
 
 
 road_len = []
@@ -92,8 +92,9 @@ for i, building in enumerate(factories + suppliers):
         road_len[i].append(building.distanceTo(supplier))
 
 
+
 for row in road_len:
-    row[-1] /= 5
+    row[-1] /= TRAIN_TO_TRUCK
 
 model += lpSum(road_len[i][j] * num_trucks[i][j] for i in range(len(factories + suppliers)) for j in range(len(suppliers)))
 
@@ -111,12 +112,14 @@ for i, supplier in enumerate(suppliers):
 model.writeLP("lastbil.lp")
 model.solve()
 
+
 with open("solution.txt", "w") as f:
     f.write("OPTIMALA VÄRDEN:\n")
     for v in model.variables():
         if (v.varValue != 0):
             f.write(f"{v.name} = {v.varValue}\n")
-    f.write(f"\nSTRÄCKA KÖRD:\n{value(model.objective):.2f}")
+    f.write(f"\nPOSITION MELLANLAGER: ({suppliers[-1].pos[0]:.2f}, {suppliers[-1].pos[1]:.2f}) ")
+    f.write(f"\nSTRÄCKA KÖRD: {value(model.objective):.2f}")
 
 
 
