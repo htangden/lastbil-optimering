@@ -20,9 +20,7 @@ class Building:
     
     def __str__(self):
         return self.name
-    
-    def __repr__(self):
-        return self.name
+
     
 
 class Factory(Building):
@@ -114,12 +112,14 @@ def run_with_midpoint(suppliers, factories, midpoint_pos):
 
 
 models = []
-
-for r in range(1, len(suppliers)):
-    for supplier_combo in combinations(suppliers, r):
-        midpoint = weighted_midpoint(list(supplier_combo), factories)
-        models.append(run_with_midpoint(suppliers, factories, midpoint))
-        print(supplier_combo, value(models[-1].objective))
+for amount_of_factories in range(1, len(factories)): #förlåt om du försöker läsa
+    for factory_combo in combinations(factories, amount_of_factories):
+        for amount_of_suppliers in range(1, len(suppliers)):
+            for supplier_combo in combinations(suppliers, amount_of_suppliers):
+                midpoint = weighted_midpoint(list(supplier_combo), list(factory_combo))
+                models.append(run_with_midpoint(suppliers, factories, midpoint))
+                if value(models[-1].objective) < 30000:
+                    print([str(obj) for obj in factory_combo+supplier_combo], value(models[-1].objective))
 
 best_model = min(models, key=lambda x: value(x.objective))
 
