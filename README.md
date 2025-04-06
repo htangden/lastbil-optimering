@@ -27,4 +27,10 @@ Programmet körs sedan genom att köra `lastbil.py` med path till txt-fil med da
 python lastbil.py data.txt
 </pre>
 
-Resultatet presenteras därefter i filen `solution.txt`.
+Resultatet presenteras därefter i mappen `output` i `solution.txt` och även grafiskt i filen `solution.png`. Ifall kartbakgrunden inte önskas anges `False` efter filnamn som kommandoradsarugment.
+
+<pre>
+python lastbil.py data.txt False
+</pre>
+
+

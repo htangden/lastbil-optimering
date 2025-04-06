@@ -13,6 +13,7 @@ import math
 import sys
 
 TRAIN_TO_TRUCK = 10
+EARTH_RADIUS = 6378
 
 
 class Building:
@@ -62,7 +63,7 @@ with open(sys.argv[1]) as file:
                 (Factory if section == "FABRIKER" else Supplier)((float(x), float(y)), name, int(capacity))
             )
 
-EARTH_RADIUS = 6378
+
 
 def weighted_midpoint(suppliers : list[Supplier], factories : list[Factory]) -> Tuple[float, float]:
     coords = [building.pos for building in suppliers + factories]
@@ -78,23 +79,27 @@ def weighted_midpoint(suppliers : list[Supplier], factories : list[Factory]) -> 
     x = ak2_xk/ak2
     y = ak2_yk/ak2
 
+
+    def distance(point):
+        return sum([a[i] * geodesic(point, coords[i]).kilometers for i in range(len(coords))])
+        
+
     def haversine_distance(point):
-        """Compute total Haversine distance from a given point to all coords."""
-        lon, lat = point  # Unpack the tuple
-        lon, lat = radians(lon), radians(lat)  # Convert to radians
+        lon, lat = point  
+        lon, lat = radians(lon), radians(lat)  
 
         total_distance = 0
         for i, (xk, yk) in enumerate(coords):
-            xk, yk = radians(xk), radians(yk)  # Convert to radians
+            xk, yk = radians(xk), radians(yk)  
             dlon = lon - xk
             dlat = lat - yk
             alfa = sin(dlat / 2) ** 2 + cos(lat) * cos(yk) * sin(dlon / 2) ** 2
             c = 2 * atan2(sqrt(alfa), sqrt(1 - alfa))
-            total_distance += EARTH_RADIUS * c * a[i]  # Distance in km
+            total_distance += EARTH_RADIUS * c * a[i] 
 
         return total_distance
     
-    long, lat = minimize(haversine_distance, x0=[x, y]).x
+    long, lat = minimize(distance, x0=[x, y]).x
     return long, lat
 
 
@@ -132,30 +137,32 @@ def run_with_midpoint(suppliers, factories, midpoint_pos : Tuple[float, float]):
         model += (sum_to_supplier - sum_from_supplier) == supplier.needed, f"Rätt mängd till {supplier}"
 
 
-    model.writeLP("lastbil.lp")
+    model.writeLP("output/lastbil.lp")
     model.solve(PULP_CBC_CMD(msg=False))
-    return model, midpoint_pos
+    return model
 
 
 models = []
 positions = []
 
-for amount_of_factories in range(1, len(factories)):
+for amount_of_factories in range(1, len(factories) + 1):
     for factory_combo in combinations(factories, amount_of_factories):
-        for amount_of_suppliers in range(1, len(suppliers)):
+        for amount_of_suppliers in range(1, len(suppliers) + 1):
             for supplier_combo in combinations(suppliers, amount_of_suppliers):
                 midpoint = weighted_midpoint(list(supplier_combo), list(factory_combo))
-                model, pos = run_with_midpoint(suppliers, factories, midpoint)
+                model = run_with_midpoint(suppliers, factories, midpoint)
                 models.append(model)
-                positions.append(pos)
+                positions.append(midpoint)
                 # print([str(obj) for obj in factory_combo+supplier_combo], value(models[-1].objective))
 
 
 best_model = min(models, key=lambda x: value(x.objective))
 best_position = positions[models.index(best_model)]
 
+# best_model = run_with_midpoint(suppliers, factories, (55, 15))
+# best_position = (55, 15)
 
-with open("solution.txt", "w") as f:
+with open("output/solution.txt", "w") as f:
     f.write("OPTIMALA VÄRDEN:\n")
     for v in best_model.variables():
         if (v.varValue != 0):
@@ -165,8 +172,13 @@ with open("solution.txt", "w") as f:
 
 
 buildings = factories + suppliers + [Building(best_position, "Mellanlager")]
-lats = [b.pos[0] for b in buildings]
 lons = [b.pos[1] for b in buildings]
+lats = [b.pos[0] for b in buildings]
+
+lats_sup = [s.pos[0] for s in suppliers]
+lats_fac = [f.pos[0] for f in factories]
+lons_sup = [s.pos[1] for s in suppliers]
+lons_fac = [f.pos[1] for f in factories]
 names = [b.name for b in buildings]
 
 connections = []
@@ -179,31 +191,39 @@ for v in best_model.variables():
 
 fig, ax = plt.subplots(figsize=(10, 6), subplot_kw={'projection': ccrs.PlateCarree()})
 
-# Add map features
-ax.add_feature(cfeature.COASTLINE)
-ax.add_feature(cfeature.BORDERS, linestyle=":")
-ax.add_feature(cfeature.LAND, edgecolor="black", facecolor="lightgray")
-ax.add_feature(cfeature.OCEAN, facecolor="lightblue")
+try:
+    add_atlas = (sys.argv[2] != "False")
+except IndexError:
+    add_atlas = True
 
-# Plot buildings as red dots
-ax.scatter(lons, lats, color="red", s=100, edgecolor="black", label="Byggnader")
+if add_atlas:
+    ax.add_feature(cfeature.COASTLINE)
+    ax.add_feature(cfeature.BORDERS, linestyle=":")
+    ax.add_feature(cfeature.LAND, edgecolor="black", facecolor="lightgray")
+    ax.add_feature(cfeature.OCEAN, facecolor="lightblue")
 
-# Annotate buildings
+
+
+ax.scatter(lons_sup, lats_sup, color="green", s=75, label="Grossister")
+ax.scatter(lons_fac, lats_fac,color="red", s=75, label="Fabriker")
+ax.scatter(best_position[1], best_position[0], color="purple", s=75, label="Mellanlager")
+
 for i, name in enumerate(names):
     ax.text(lons[i] + 0.5, lats[i], name, fontsize=12, verticalalignment="bottom", horizontalalignment="right", color="black")
 
-# Draw connections between buildings
 for b1, b2, num in connections:
-    x_vals = [b1.pos[1], b2.pos[1]]  # Longitude
-    y_vals = [b1.pos[0], b2.pos[0]]  # Latitude
+    x_vals = [b1.pos[1], b2.pos[1]]  
+    y_vals = [b1.pos[0], b2.pos[0]]  
     ax.plot(x_vals, y_vals, color="blue", linewidth=2, linestyle="--")
 
-    # Label the connection in the middle
+
     mid_x, mid_y = (x_vals[0] + x_vals[1]) / 2, (y_vals[0] + y_vals[1]) / 2
     ax.text(mid_x, mid_y, str(num), fontsize=12, color="black", weight="bold", ha="center", va="center", bbox=dict(facecolor="white", alpha=0.7))
 
-# Set title and show the plot
+
 ax.set_title("Lastbilsplanering", fontsize=14)
 ax.set_aspect('auto')
-plt.savefig("solution.png")
+plt.legend()
+plt.savefig("output/solution.png")
+plt.show()
 
