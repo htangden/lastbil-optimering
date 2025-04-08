@@ -1,15 +1,27 @@
 OPTIMALA VÄRDEN:
-LASTBILAR:Göteborg_Mellanlager = 100.0
-LASTBILAR:Helsingborg_Halmstad = 70.0
-LASTBILAR:Helsingborg_Kristianstad = 15.0
-LASTBILAR:Helsingborg_Malmö = 30.0
-LASTBILAR:Helsingborg_Mellanlager = 35.0
-LASTBILAR:Mellanlager_Borås = 65.0
-LASTBILAR:Mellanlager_Jönköping = 30.0
-LASTBILAR:Mellanlager_Skövde = 40.0
-LASTBILAR:Älmhult_Kalmar = 30.0
-LASTBILAR:Älmhult_Kristianstad = 35.0
-LASTBILAR:Älmhult_Väjxö = 35.0
+Göteborg till Mellanlager = 100.0
+Helsingborg till Halmstad = 70.0
+Helsingborg till Kristianstad = 15.0
+Helsingborg till Malmö = 30.0
+Helsingborg till Mellanlager = 35.0
+Mellanlager till Borås = 65.0
+Mellanlager till Jönköping = 30.0
+Mellanlager till Skövde = 40.0
+Älmhult till Kalmar = 30.0
+Älmhult till Kristianstad = 35.0
+Älmhult till Väjxö = 35.0
 
 POSITION MELLANLAGER: (57.72, 12.94) 
 STRÄCKA KÖRD: 22571.18
+UTAN MELLANLAGER:
+Göteborg till Borås = 65.0
+Göteborg till Skövde = 35.0
+Helsingborg till Halmstad = 70.0
+Helsingborg till Kristianstad = 50.0
+Helsingborg till Malmö = 30.0
+Älmhult till Jönköping = 30.0
+Älmhult till Kalmar = 30.0
+Älmhult till Skövde = 5.0
+Älmhult till Väjxö = 35.0
+
+STRÄCKA KÖRD: 29920.87
